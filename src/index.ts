@@ -83,7 +83,10 @@ export async function main(args: string[]): Promise<TestResult[]> {
     process.exit(1);
   }
 
-  if (args[0].endsWith("be-urls.json")) {
+  if (["all", "prod", "qa"].includes(args[0])) {
+    const qa = args[0] === "qa" || args[0] === "all";
+    const prod = args[0] === "prod" || args[0] === "all";
+
     const file = fs.readFileSync(
       path.join(__dirname, "../be-urls.json"),
       "utf-8"
@@ -97,38 +100,42 @@ export async function main(args: string[]): Promise<TestResult[]> {
       const entry = data[i];
       log(`Testing ${entry.retailUnit} (${i + 1}/${data.length})...`);
 
-      const responseDataQA: AppSettings | string = await axios
-        .get(entry.qa + "/configuration", AXIOS_CONFIG)
-        .then((response) => response.data)
-        .catch((e) => e.response?.data ?? "error fetching");
+      if (qa) {
+        const responseDataQA: AppSettings | string = await axios
+          .get(entry.qa + "/configuration", AXIOS_CONFIG)
+          .then((response) => response.data)
+          .catch((e) => e.response?.data ?? "error fetching");
 
-      const responseDataPROD: AppSettings | string = await axios
-        .get(entry.prod + "/configuration", AXIOS_CONFIG)
-        .then((response) => response.data)
-        .catch((e) => e.response?.data ?? "error fetching");
-
-      if (typeof responseDataQA === "string") {
-        testResults.push({
-          passed: false,
-          filePath: entry.retailUnit + " QA",
-          error: "Could not fetch config",
-        });
-      } else {
-        testResults.push(
-          validateJSON(responseDataQA, entry.retailUnit + " QA")
-        );
+        if (typeof responseDataQA === "string") {
+          testResults.push({
+            passed: false,
+            filePath: entry.retailUnit + " QA",
+            error: "Could not fetch config",
+          });
+        } else {
+          testResults.push(
+            validateJSON(responseDataQA, entry.retailUnit + " QA")
+          );
+        }
       }
 
-      if (typeof responseDataPROD === "string") {
-        testResults.push({
-          passed: false,
-          filePath: entry.retailUnit + " PROD",
-          error: "Could not fetch config",
-        });
-      } else {
-        testResults.push(
-          validateJSON(responseDataPROD, entry.retailUnit + " PROD")
-        );
+      if (prod) {
+        const responseDataPROD: AppSettings | string = await axios
+          .get(entry.prod + "/configuration", AXIOS_CONFIG)
+          .then((response) => response.data)
+          .catch((e) => e.response?.data ?? "error fetching");
+
+        if (typeof responseDataPROD === "string") {
+          testResults.push({
+            passed: false,
+            filePath: entry.retailUnit + " PROD",
+            error: "Could not fetch config",
+          });
+        } else {
+          testResults.push(
+            validateJSON(responseDataPROD, entry.retailUnit + " PROD")
+          );
+        }
       }
     }
 

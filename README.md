@@ -47,6 +47,10 @@ If you don't need latest version of stuff, just
 
 - a file, then the test is ran against that file
 - a directory, then the test is ran against all json files in that directory (not recursive at the moment but easy to fix if that is desirable)
+- a url, then it tries to fetch from that repo
+- qa. tests all qa
+- prod: tests all prod
+- all: tests both prod and qa
 
 ex:
 
@@ -104,7 +108,6 @@ Then just run
 
 # Other
 
-- If you point the program at be-url.json file (in the pp-repo) it will run tests against all prod and qa environments
 - Let oskar know if this might be useful
 - If you are trying to go for prod or qa environments, you need to use vpn or have whitelisted IP
 - JSON is pronounced J'son 🇫🇷

@@ -48,6 +48,16 @@ function extractImports(filePath) {
   return imports.filter((imp) => imp.startsWith("."));
 }
 
+function copyBeUrls() {
+  const beUrlsPath = path.join(TEMP_REPO_DIR, "scripts/local", "be-urls.json");
+  const destPath = path.join("./be-urls.json");
+  if (fs.existsSync(beUrlsPath)) {
+    fs.copyFileSync(beUrlsPath, destPath);
+  } else {
+    console.error("❌ be-urls.ts not found in the repository.");
+  }
+}
+
 function copyReachableFiles(entryFile, sourceDir, destDir, visited = new Set()) {
   const entryPath = path.join(sourceDir, entryFile);
   if (visited.has(entryPath)) return; // Avoid infinite loops
@@ -88,6 +98,8 @@ function main() {
   const sourceDir = path.join(TEMP_REPO_DIR, REPO_PATH);
   console.log("🧱 Putting new files into folder src/validation");
   copyReachableFiles(ENTRY_FILE, sourceDir, OUTPUT_DIR);
+
+  copyBeUrls();
 
   if (fs.existsSync(TEMP_REPO_DIR)) {
     console.log("😨🔫 Getting rid of temp directory");
