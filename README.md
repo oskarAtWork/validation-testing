@@ -2,7 +2,9 @@
 
 The purpose of this project is to easily test if a change to the appsettings response would break FE's validation.
 
-You just create some example appsettings json-files, point this validator at them and it will say which work and which don't. To see examples, see folder `example-input`
+You just create some example appsettings json-files, point this validator at them and it will say which work and which don't. To see examples, see folder `example-input`.
+
+**Or** you point it at your configuration endpoint like https://localhost:5000/configuration
 
 npm run fetch actually downloads the validation files from pp-fe repo and puts them into the project
 

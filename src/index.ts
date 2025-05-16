@@ -100,10 +100,22 @@ export async function main(args: string[]): Promise<TestResult[]> {
       const data = response.data as AppSettings;
       return [validateJSON(data, arg)];
     } catch (error) {
-      if (error instanceof Error) {
-        logError(`Error fetching JSON from URL ${arg} :`, error.message);
+      if (
+        axios.isAxiosError(error) &&
+        error.response?.data === "RBAC: access denied"
+      ) {
+        logError("\n❌RBAC: access denied. Is your vpn on?\n");
+        process.exit(1);
+      } else if (error instanceof Error) {
+        logError(
+          `\n❌Error fetching JSON from URL ${arg} :`,
+          error.message,
+          "\n"
+        );
+        process.exit(1);
       } else {
-        logError(`Error fetching JSON from URL ${arg} :`, error);
+        logError(`\n❌Error fetching JSON from URL ${arg} :`, error, "\n");
+        process.exit(1);
       }
     }
   } else if (fs.existsSync(arg)) {
