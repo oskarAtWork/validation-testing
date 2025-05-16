@@ -1,6 +1,7 @@
 import fs from "fs";
+import https from "https";
 import path from "path";
-import axios, { isAxiosError } from "axios";
+import axios from "axios";
 import { AppSettings, parseAppsettings } from "./validation/app-settings";
 import { ZodError } from "zod";
 
@@ -89,13 +90,19 @@ export async function main(args: string[]): Promise<TestResult[]> {
   const arg = args[0];
   if (arg.startsWith("http")) {
     try {
-      const response = await axios.get(arg);
+      console.log("Fetching JSON from URL:", arg);
+      const response = await axios.get(arg, {
+        httpsAgent: new https.Agent({
+          rejectUnauthorized: false,
+        }),
+        timeout: 10000, // 10 seconds timeout
+      });
       const data = response.data as AppSettings;
       return [validateJSON(data, arg)];
     } catch (error) {
       if (error instanceof Error) {
         logError(`Error fetching JSON from URL ${arg} :`, error.message);
-      } else if (error instanceof Error) {
+      } else {
         logError(`Error fetching JSON from URL ${arg} :`, error);
       }
     }
