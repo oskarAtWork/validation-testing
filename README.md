@@ -103,4 +103,5 @@ Then just run
 # Other
 
 - Let oskar know if this might be useful
+- If you are trying to go for prod or qa environments, you need to use vpn or have whitelisted IP
 - JSON is pronounced J'son 🇫🇷
