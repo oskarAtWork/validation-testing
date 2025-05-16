@@ -19,26 +19,26 @@ First time:
 ```bash
   npm install
   npm run fetch
-  npm start PATH_TO_TEST_FILE_OR_FILES
+  npm start ARG
 ```
 
 Not first time:
 
 ```bash
   npm run fetch
-  npm start PATH_TO_TEST_FILE_OR_FILES
+  npm start ARG
 ```
 
 or
 
 ```bash
-  npm run fetch-start PATH_TO_TEST_FILE_OR_FILES
+  npm run fetch-start ARG
 ```
 
 If you don't need latest version of stuff, just
 
 ```bash
-  npm start PATH_TO_TEST_FILE_OR_FILES
+  npm start ARG
 ```
 
 `npm start` (and `npm run fetch-start`) requires 1 argument, that argument is a file path to either
@@ -64,6 +64,18 @@ will run test on
 will run test on just
 
 - example-input/app-settings.json
+
+```bash
+  npm start http://localhost:5000/configuration
+```
+
+will call that endpoint (GET) and run the test on the response
+there is an example server you can start in parallell, it accepts a port but assumes 5000 if not given
+
+```bash
+  npm run mock-server PORT
+  npm start http://localhost:5000/configuration
+```
 
 # One liner
 

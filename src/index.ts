@@ -75,7 +75,7 @@ export async function main(args: string[]): Promise<TestResult[]> {
     process.exit(1);
   }
 
-  if (args[0] === "PATH_TO_TEST_FILE_OR_FILES") {
+  if (args[0] === "ARG") {
     logError(
       "Don't just follow README without thinking. Please provide a file or folder path"
     );
