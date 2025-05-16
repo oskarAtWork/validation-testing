@@ -5,6 +5,13 @@ import axios from "axios";
 import { AppSettings, parseAppsettings } from "./validation/app-settings";
 import { ZodError } from "zod";
 
+const AXIOS_CONFIG = {
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false,
+  }),
+  timeout: 10000, // 10 seconds timeout
+};
+
 type TestResult =
   | {
       passed: true;
@@ -13,7 +20,7 @@ type TestResult =
   | {
       passed: false;
       filePath: string;
-      error: ZodError | undefined;
+      error: ZodError | string | undefined;
     };
 
 const log = process.env.NODE_ENV !== "test" ? console.log : () => {};
@@ -76,6 +83,58 @@ export async function main(args: string[]): Promise<TestResult[]> {
     process.exit(1);
   }
 
+  if (args[0].endsWith("be-urls.json")) {
+    const file = fs.readFileSync(
+      path.join(__dirname, "../be-urls.json"),
+      "utf-8"
+    );
+
+    const data = JSON.parse(file) as Record<string, string>[];
+
+    const testResults: TestResult[] = [];
+
+    for (let i = 0; i < data.length; i++) {
+      const entry = data[i];
+      log(`Testing ${entry.retailUnit} (${i + 1}/${data.length})...`);
+
+      const responseDataQA: AppSettings | string = await axios
+        .get(entry.qa + "/configuration", AXIOS_CONFIG)
+        .then((response) => response.data)
+        .catch((e) => e.response?.data ?? "error fetching");
+
+      const responseDataPROD: AppSettings | string = await axios
+        .get(entry.prod + "/configuration", AXIOS_CONFIG)
+        .then((response) => response.data)
+        .catch((e) => e.response?.data ?? "error fetching");
+
+      if (typeof responseDataQA === "string") {
+        testResults.push({
+          passed: false,
+          filePath: entry.retailUnit + " QA",
+          error: "Could not fetch config",
+        });
+      } else {
+        testResults.push(
+          validateJSON(responseDataQA, entry.retailUnit + " QA")
+        );
+      }
+
+      if (typeof responseDataPROD === "string") {
+        testResults.push({
+          passed: false,
+          filePath: entry.retailUnit + " PROD",
+          error: "Could not fetch config",
+        });
+      } else {
+        testResults.push(
+          validateJSON(responseDataPROD, entry.retailUnit + " PROD")
+        );
+      }
+    }
+
+    return testResults;
+  }
+
   if (args[0] === "ARG") {
     logError(
       "Don't just follow README without thinking. Please provide a file or folder path"
@@ -91,12 +150,7 @@ export async function main(args: string[]): Promise<TestResult[]> {
   if (arg.startsWith("http")) {
     try {
       console.log("Fetching JSON from URL:", arg);
-      const response = await axios.get(arg, {
-        httpsAgent: new https.Agent({
-          rejectUnauthorized: false,
-        }),
-        timeout: 10000, // 10 seconds timeout
-      });
+      const response = await axios.get(arg, AXIOS_CONFIG);
       const data = response.data as AppSettings;
       return [validateJSON(data, arg)];
     } catch (error) {
@@ -167,7 +221,9 @@ async function runClient() {
     } else {
       logError(`❌ Invalid: ${result.filePath}`);
       if (!result.error) {
-        logError("  - Unknown error");
+        logError("Unknown error");
+      } else if (typeof result.error === "string") {
+        logError(result.error);
       } else {
         logError(result.error.message);
       }

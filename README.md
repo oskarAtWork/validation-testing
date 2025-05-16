@@ -79,7 +79,7 @@ there is an example server you can start in parallell, it accepts a port but ass
   npm start http://localhost:5000/configuration
 ```
 
-# One liner
+# One liner(s)
 
 This line does it all (switch out example-input to your folder)
 
