@@ -1,0 +1,490 @@
+{
+  "adjacentCountries": [
+    "CA",
+    "US"
+  ],
+  "countries": [],
+  "countriesForProfile": [],
+  "countriesForAddresses": [],
+  "currencySettings": {
+    "divider": " ",
+    "alwaysSeparateThousand": true,
+    "fractionDigits": 0,
+    "hideDecimalsForWholeNumbers": true,
+    "position": "leading",
+    "decimal": "."
+  },
+  "defaultRetailUnit": "mx",
+  "defaultCulture": "es-MX",
+  "fields": {
+    "display": {
+      "address": [
+        "Line1",
+        "ExteriorNumber",
+        "InteriorNumber",
+        "Neighbourhood",
+        "City",
+        "Municipality",
+        "State",
+        "PostalCode",
+        "AdditionalInformation",
+        "Phone",
+        "Coordinates"
+      ],
+      "profile": [
+        "FullName",
+        "Phone",
+        "Email",
+        "Rfc",
+        "FamilyNumber"
+      ]
+    },
+    "line2ExpandedByDefault": false,
+    "repeatedEmail": false,
+    "validation": {
+      "autoZip": [
+        "PostalCode",
+        "State",
+        "Municipality",
+        "City",
+        "Neighbourhood"
+      ],
+      "address": [
+        {
+          "fieldName": "AddressContact",
+          "isRequired": true,
+          "maxLength": 100,
+          "regex": [
+            "^((?!(https?|\\d?ftps?|smtp|ssh|file):\\/\\/)(?!www\\.)(?!((@+)\\S{0,}(\\.+)))(?!((?:[0-9]{1,3}\\.){3}[0-9]{1,3}))(?!([<>])).)+$",
+            "^[\\p{L}\\p{M} ,.'-]*$"
+          ]
+        },
+        {
+          "fieldName": "Phone",
+          "isRequired": true,
+          "maxLength": 20,
+          "minLength": 5,
+          "regex": [
+            "^\\+\\d*$"
+          ]
+        },
+        {
+          "fieldName": "PostalCode",
+          "isRequired": true,
+          "maxLength": 5,
+          "minLength": 5,
+          "regex": [
+            "^[0-9]*$"
+          ]
+        },
+        {
+          "fieldName": "State",
+          "isRequired": true,
+          "maxLength": 60,
+          "regex": [
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+          ]
+        },
+        {
+          "fieldName": "Municipality",
+          "isRequired": true,
+          "maxLength": 60,
+          "regex": [
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+          ]
+        },
+        {
+          "fieldName": "City",
+          "isRequired": true,
+          "maxLength": 35,
+          "regex": [
+            "^((?!(https?|\\d?ftps?|smtp|ssh|file):\\/\\/)(?!www\\.)(?!((@+)\\S{0,}(\\.+)))(?!((?:[0-9]{1,3}\\.){3}[0-9]{1,3}))(?!([<>])).)+$"
+          ]
+        },
+        {
+          "fieldName": "Neighbourhood",
+          "isRequired": true,
+          "maxLength": 60,
+          "regex": [
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+          ]
+        },
+        {
+          "fieldName": "Line1",
+          "isRequired": true,
+          "maxLength": 100,
+          "regex": [
+            "^((?!(https?|\\d?ftps?|smtp|ssh|file):\\/\\/)(?!www\\.)(?!((@+)\\S{0,}(\\.+)))(?!((?:[0-9]{1,3}\\.){3}[0-9]{1,3}))(?!([<>])).)+$",
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$",
+            ".*"
+          ]
+        },
+        {
+          "fieldName": "ExteriorNumber",
+          "isRequired": true,
+          "maxLength": 20,
+          "regex": [
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+          ]
+        },
+        {
+          "fieldName": "InteriorNumber",
+          "isRequired": false,
+          "maxLength": 20,
+          "regex": [
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+          ]
+        },
+        {
+          "fieldName": "AdditionalInformation",
+          "isRequired": false,
+          "maxLength": 100,
+          "regex": [
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+          ]
+        },
+        {
+          "fieldName": "Coordinates",
+          "isRequired": false,
+          "properties": [
+            {
+              "fieldName": "Latitude",
+              "isRequired": true
+            },
+            {
+              "fieldName": "Longitude",
+              "isRequired": true
+            }
+          ]
+        }
+      ],
+      "addressLimit": 10,
+      "date": [
+        {
+          "fieldName": "Day",
+          "isRequired": false,
+          "maxLength": 2,
+          "minLength": 1,
+          "regex": [
+            "^(0[1-9]|[1-9]|[12][0-9]|3[01])$"
+          ]
+        },
+        {
+          "fieldName": "Month",
+          "isRequired": false,
+          "maxLength": 2,
+          "minLength": 1,
+          "regex": [
+            "^(0[1-9]|[1-9]|1[0-2])$"
+          ]
+        },
+        {
+          "fieldName": "Year",
+          "isRequired": false,
+          "maxLength": 4,
+          "minLength": 4,
+          "regex": [
+            "^(19|20)\\d{2}$"
+          ]
+        }
+      ],
+      "passwordRequirements": {
+        "characterLimitRegex": "^.{8,20}$",
+        "characterLowercaseRegex": "[a-z]",
+        "characterUppercaseRegex": "[A-Z]",
+        "consecutiveRepeatedCharactersRegex": "^(?:(.)\\1?(?!\\1))+$",
+        "tooManyConsecutiveRepeatedCharactersRegex": "(.)\\1{2}",
+        "numbersRegex": "[0-9]",
+        "specialCharactersRegex": "(?=.*[^a-zA-Z0-9])"
+      },
+      "profile": [
+        {
+          "fieldName": "FirstName",
+          "isRequired": true,
+          "maxLength": 50,
+          "regex": [
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M} ,.'-]*$"
+          ]
+        },
+        {
+          "fieldName": "LastName",
+          "isRequired": true,
+          "maxLength": 49,
+          "regex": [
+            "^((?!((@+)\\S{0,}(\\.+))).)*$",
+            "^[\\p{L}\\p{M} ,.'-]*$"
+          ]
+        },
+        {
+          "fieldName": "Phone",
+          "isRequired": false,
+          "maxLength": 20,
+          "minLength": 5,
+          "regex": [
+            "^\\+\\d*$"
+          ]
+        },
+        {
+          "fieldName": "Rfc",
+          "isRequired": false,
+          "maxLength": 13,
+          "minLength": 13,
+          "regex": [
+            "^(([A-Z]{3,4})((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229)([A-Z0-9]{3}))?$"
+          ]
+        },
+        {
+          "fieldName": "FamilyNumber",
+          "isRequired": false,
+          "maxLength": 16,
+          "minLength": 16,
+          "regex": [
+            "^9995\\d{12}$"
+          ]
+        }
+      ],
+      "signUp": {
+        "address": {
+          "formFields": [
+            {
+              "fieldName": "Phone",
+              "isRequired": true,
+              "maxLength": 20,
+              "minLength": 5,
+              "regex": [
+                "^\\+\\d*$"
+              ]
+            },
+            {
+              "fieldName": "PostalCode",
+              "isRequired": true,
+              "maxLength": 5,
+              "minLength": 5,
+              "regex": [
+                "^[0-9]*$"
+              ]
+            },
+            {
+              "fieldName": "State",
+              "isRequired": true,
+              "maxLength": 60,
+              "regex": [
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+              ]
+            },
+            {
+              "fieldName": "Municipality",
+              "isRequired": true,
+              "maxLength": 60,
+              "regex": [
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+              ]
+            },
+            {
+              "fieldName": "City",
+              "isRequired": true,
+              "maxLength": 35,
+              "regex": [
+                "^((?!(https?|\\d?ftps?|smtp|ssh|file):\\/\\/)(?!www\\.)(?!((@+)\\S{0,}(\\.+)))(?!((?:[0-9]{1,3}\\.){3}[0-9]{1,3}))(?!([<>])).)+$"
+              ]
+            },
+            {
+              "fieldName": "Neighbourhood",
+              "isRequired": true,
+              "maxLength": 60,
+              "regex": [
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+              ]
+            },
+            {
+              "fieldName": "Line1",
+              "isRequired": true,
+              "maxLength": 100,
+              "regex": [
+                "^((?!(https?|\\d?ftps?|smtp|ssh|file):\\/\\/)(?!www\\.)(?!((@+)\\S{0,}(\\.+)))(?!((?:[0-9]{1,3}\\.){3}[0-9]{1,3}))(?!([<>])).)+$",
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$",
+                ".*"
+              ]
+            },
+            {
+              "fieldName": "ExteriorNumber",
+              "isRequired": true,
+              "maxLength": 20,
+              "regex": [
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+              ]
+            },
+            {
+              "fieldName": "InteriorNumber",
+              "isRequired": false,
+              "maxLength": 20,
+              "regex": [
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+              ]
+            },
+            {
+              "fieldName": "AdditionalInformation",
+              "isRequired": false,
+              "maxLength": 100,
+              "regex": [
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M}\\p{Nd}\\/\\\\ ,.;:&#'@\\(\\)\\|´`\\-]*$"
+              ]
+            },
+            {
+              "fieldName": "Coordinates",
+              "isRequired": false,
+              "properties": [
+                {
+                  "fieldName": "Latitude",
+                  "isRequired": true
+                },
+                {
+                  "fieldName": "Longitude",
+                  "isRequired": true
+                }
+              ]
+            }
+          ],
+          "required": false
+        },
+        "profile": {
+          "formFields": [
+            {
+              "fieldName": "FirstName",
+              "isRequired": true,
+              "maxLength": 50,
+              "regex": [
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M} ,.'-]*$"
+              ]
+            },
+            {
+              "fieldName": "LastName",
+              "isRequired": true,
+              "maxLength": 49,
+              "regex": [
+                "^((?!((@+)\\S{0,}(\\.+))).)*$",
+                "^[\\p{L}\\p{M} ,.'-]*$"
+              ]
+            },
+            {
+              "fieldName": "Phone",
+              "isRequired": false,
+              "maxLength": 20,
+              "minLength": 5,
+              "regex": [
+                "^\\+\\d*$"
+              ]
+            },
+            {
+              "fieldName": "Email",
+              "isRequired": true,
+              "maxLength": 80,
+              "regex": [
+                "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$"
+              ]
+            }
+          ],
+          "required": true
+        },
+        "newsAndOffers": []
+      }
+    }
+  },
+  "googleMapsApiKey": "AIzaSyDt-xn_IQDh-O03ifm676XtraV1DpXgYk0",
+  "googleTagManagerId": "GTM-MDCB6SJ",
+  "identityProvider": "Irw",
+  "ikeaBaseUrl": "https://www.cte.ikeadt.com/",
+  "ikeaFamilyTerms": "",
+  "languageDirectionMap": {
+    "en": "ltr",
+    "es": "ltr"
+  },
+  "maintenanceMode": false,
+  "features": {
+    "crm": false,
+    "cmd": false,
+    "loyaltyAndRewards": false,
+    "orderHistory": true,
+    "orderHistoryDetails": true,
+    "planners": true,
+    "points": false,
+    "wallet": true,
+    "walletInteractive": true
+  },
+  "routeToggles": {
+    "orderHistory": true
+  },
+  "supportedCultures": [
+    "es-MX",
+    "en-MX"
+  ],
+  "stores": [
+    {
+      "address": {
+        "city": "Puebla",
+        "zipCode": "72197",
+        "street": "Centro comercial Vía San Ángel, Av. Atlixcáyotl 1504, Reserva Territorial Atlixcáyotl",
+        "timezone": "America/Mexico_City",
+        "stateProvinceCode": ""
+      },
+      "displayName": "Puebla",
+      "displayNameAlternate": "IKEA Puebla",
+      "id": "652",
+      "latitude": "19.027",
+      "longitude": "-98.2377",
+      "name": "IKEA Puebla",
+      "site": "https://www.ikea.com/mx/es/stores/puebla/"
+    },
+    {
+      "address": {
+        "city": "Ciudad de México",
+        "zipCode": "15530",
+        "street": "Encuentro Oceanía, Av. del Peñón 355, Moctezuma 2.a Sección, Venustiano Carranza.",
+        "timezone": "America/Mexico_City"
+      },
+      "displayName": "Oceanía",
+      "displayNameAlternate": "IKEA Oceanía",
+      "id": "612",
+      "latitude": "19.4403",
+      "longitude": "-99.0934",
+      "name": "Mexico City - Oceania",
+      "site": "https://www.ikea.com/mx/es/stores/oceania/"
+    },
+    {
+      "address": {
+        "city": "Zapopan",
+        "zipCode": "45055",
+        "street": "Av. Adolfo López Mateos Sur 2121, Rinconada del Sol",
+        "timezone": "America/Mexico_City",
+        "stateProvinceCode": "JAL"
+      },
+      "displayName": "Guadalajara Expo",
+      "displayNameAlternate": "IKEA Guadalajara Expo",
+      "id": "683",
+      "latitude": "20.65633",
+      "longitude": "-103.39917",
+      "name": "IKEA Guadalajara - Expo",
+      "site": "https://www.ikea.com/mx/es/stores/guadalajara/"
+    }
+  ],
+  "links": {
+    "orderTracking": "https://www.ikea.com/mx/en/customer-service/track-manage-order/"
+  },
+  "optimizelySdkKey": "WT8FxsLPV9ZBzor4YuTvE"
+}

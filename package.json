@@ -1,0 +1,40 @@
+{
+  "name": "validation-testing",
+  "version": "1.0.0",
+  "author": "it is me, Oskar",
+  "license": "Do whatever you want",
+  "description": "A TypeScript project for validation testing.",
+  "scripts": {
+    "fetch": "node get-from-github.js",
+    "start": "ts-node src/index.ts",
+    "fetch-and-start": "npm run fetch && npm start",
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "simple-git": "3.27.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/jest": "29.5.14",
+    "@types/node": "20.4.2",
+    "jest": "29.6.2",
+    "ts-jest": "29.1.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.2.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testMatch": [
+      "**/**test.(ts|js)"
+    ],
+    "testEnvironment": "node"
+  }
+}
