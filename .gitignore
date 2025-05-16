@@ -5,4 +5,4 @@ temp-repo/
 .vscode/
 .DS_Store
 Thumbs.db
-./src/validation
+src/validation/
