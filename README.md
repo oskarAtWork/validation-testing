@@ -104,6 +104,7 @@ Then just run
 
 # Other
 
+- If you point the program at be-url.json file (in the pp-repo) it will run tests against all prod and qa environments
 - Let oskar know if this might be useful
 - If you are trying to go for prod or qa environments, you need to use vpn or have whitelisted IP
 - JSON is pronounced J'son 🇫🇷
