@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import axios, { isAxiosError } from "axios";
 import { AppSettings, parseAppsettings } from "./validation/app-settings";
 import { ZodError } from "zod";
 
@@ -68,7 +69,7 @@ function validateAllJsonFilesInFolder(folderPath: string): TestResult[] {
   return testResults;
 }
 
-export function main(args: string[]): TestResult[] {
+export async function main(args: string[]): Promise<TestResult[]> {
   if (args.length === 0) {
     logError("Please provide a file or folder path");
     process.exit(1);
@@ -86,7 +87,19 @@ export function main(args: string[]): TestResult[] {
   log("🔥 PP-BE's new fancy breaking change tester 🔥\n");
 
   const arg = args[0];
-  if (fs.existsSync(arg)) {
+  if (arg.startsWith("http")) {
+    try {
+      const response = await axios.get(arg);
+      const data = response.data as AppSettings;
+      return [validateJSON(data, arg)];
+    } catch (error) {
+      if (error instanceof Error) {
+        logError(`Error fetching JSON from URL ${arg} :`, error.message);
+      } else if (error instanceof Error) {
+        logError(`Error fetching JSON from URL ${arg} :`, error);
+      }
+    }
+  } else if (fs.existsSync(arg)) {
     if (fs.statSync(arg).isFile() && arg.endsWith(".json")) {
       return [validateSingleFile(arg)];
     } else if (fs.statSync(arg).isDirectory()) {
@@ -102,8 +115,9 @@ export function main(args: string[]): TestResult[] {
 }
 
 // If the script is run directly, execute the main function
-if (require.main === module) {
-  const testResults = main(process.argv.slice(2)); //first two args are node and script path
+
+async function runClient() {
+  const testResults = await main(process.argv.slice(2)); //first two args are node and script path
 
   const totalTests = testResults.length;
   const passedTests = testResults.filter((result) => result.passed).length;
@@ -142,4 +156,8 @@ if (require.main === module) {
   });
 
   log("\n");
+}
+
+if (require.main === module) {
+  runClient();
 }

@@ -8,12 +8,14 @@
     "fetch": "node get-from-github.js",
     "start": "ts-node src/index.ts",
     "fetch-and-start": "npm run fetch && npm start",
-    "test": "jest"
+    "test": "jest",
+    "mock-server": "node example-server.js"
   },
   "engines": {
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "axios": "^1.9.0",
     "simple-git": "3.27.0",
     "zod": "^3.24.4"
