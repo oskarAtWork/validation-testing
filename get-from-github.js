@@ -11,15 +11,10 @@ const OUTPUT_DIR = path.resolve(__dirname, "src/validation");
 const TEMP_REPO_DIR = path.resolve(__dirname, "temp-repo");
 
 function cloneRepository() {
-  try {
-    clearDirectory(TEMP_REPO_DIR);
-    execSync(`git clone --branch ${REPO_BRANCH} --single-branch ${REPO_HTTPS_URL} ${TEMP_REPO_DIR}`, {
-      stdio: "inherit",
-    });
-    return true;
-  } catch (error) {
-    return false;
-  }
+  clearDirectory(TEMP_REPO_DIR);
+  execSync(`git clone --branch ${REPO_BRANCH} --single-branch ${REPO_HTTPS_URL} ${TEMP_REPO_DIR}`, {
+    stdio: "inherit",
+  });
 }
 
 function main() {
@@ -29,12 +24,8 @@ function main() {
     fs.rmdirSync(TEMP_REPO_DIR);
   }
 
-  if (cloneRepository()) {
-    console.log("👯 Repository cloned successfully!");
-  } else {
-    console.error("❌ Failed to clone the repository. Please check your HTTPS access.");
-    process.exit(1);
-  }
+  cloneRepository()
+  console.log("👯 Repository cloned successfully!");
 
   console.log("🧹 Cleaning up src/validation");
   clearDirectory(OUTPUT_DIR);
