@@ -6,6 +6,7 @@
   "description": "A TypeScript project for validation testing.",
   "scripts": {
     "fetch": "node get-from-github.js",
+    "local": "node --env-file .env get-from-filesystem.js",
     "start": "ts-node src/index.ts",
     "fetch-and-start": "npm run fetch && npm start",
     "test": "jest",

@@ -7,3 +7,4 @@ temp-repo/
 Thumbs.db
 src/validation/
 be-urls.json
+.env
