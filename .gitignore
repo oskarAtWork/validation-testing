@@ -1,0 +1,10 @@
+node_modules/
+temp-repo/
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+src/validation/
+be-urls.json
+.env
